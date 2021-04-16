@@ -20,5 +20,18 @@ class BusRoute extends Authenticatable
         'bus_id',
         'bus_stop_id'
     ];
+    public function bus_stop()
+    {
+        return $this->belongsTo(BusStop::class, 'bus_stop_id', 'bus_stop_id');
+    }    
+    public function bus()
+    {
+        return $this->belongsTo(Bus::class, 'bus_id', 'bus_id');
+    }
+
+    public function bus_timings()
+    {
+        return $this->hasMany(BusRoute::class,'bus_id', 'bus_id');
+    }
 
 }

@@ -25,4 +25,13 @@ class BusStop extends Authenticatable
         'postal_code',
     ];
 
+    public function bus_routes()
+    {
+        return $this->hasMany(BusRoute::class,'bus_stop_id', 'bus_stop_id');
+    }  
+    public function bus_timings()
+    {
+        return $this->hasMany(BusTiming::class,'bus_stop_id', 'bus_stop_id');
+    }
+
 }

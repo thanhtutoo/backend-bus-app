@@ -23,4 +23,8 @@ class Bus extends Authenticatable
         'bus_name',
     ];
 
+    public function bus_routes()
+    {
+        return $this->hasMany(BusRoute::class,'bus_id', 'bus_id');
+    }   
 }
