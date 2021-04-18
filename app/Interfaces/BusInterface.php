@@ -3,7 +3,7 @@
 namespace App\Interfaces;
 
 use App\Http\Requests\BusRequest;
-
+use Illuminate\Http\Request;
 interface BusInterface
 {
     /**
@@ -45,6 +45,6 @@ interface BusInterface
      * @access  public
      */
     public function deleteBus($id);
-    public function bus_stops(BusRequest $request);
-    public function bus_list($bus_stop_id);
+    public function getNearByBusStop(Request $request);
+    public function getBusByBusStopId($bus_stop_id);
 }

@@ -8,6 +8,7 @@ use App\Traits\ResponseAPI;
 use App\Models\Bus;
 use App\Models\BusTiming;
 use DB;
+use Illuminate\Http\Request;
 
 class BusRepository implements BusInterface
 {
@@ -87,18 +88,13 @@ class BusRepository implements BusInterface
         }
     }
 
-    public function bus_stops(BusRequest $request)
+    public function getNearByBusStop(Request $request)
     {
         try {
             $lat = 1.3264635;
-            //1.3272247,103.884878
-            //1.3518888,103.8341397,
-            //1.3518888,103.8341397 bishan
-            //1.3264635,103.8865065 blk 77
             $lng = 103.8865065;
-            // $bus_stops = BusStop::with('bus_timings')->get();
+ 
             $bus_stops = DB::table('bus_stops')->select("bus_stop_id", "bus_stop_name"
-
             ,DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
             * cos(radians(bus_stops.lat)) 
             * cos(radians(bus_stops.lng) - radians(" . $lng . ")) 
@@ -112,7 +108,7 @@ class BusRepository implements BusInterface
             return $this->error($e->getMessage(), $e->getCode());
         }
     }
-    public function bus_list($bus_stop_id)
+    public function getBusByBusStopId($bus_stop_id)
     {
         try {
             $current_time = time();

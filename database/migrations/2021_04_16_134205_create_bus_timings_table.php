@@ -19,6 +19,7 @@ class CreateBusTimingsTable extends Migration
             $table->integer('bus_stop_id'); 
             $table->integer('bus_id'); 
             $table->timestamps();
+            
         });
     }
 

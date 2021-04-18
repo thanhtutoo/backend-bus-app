@@ -22,13 +22,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
   
 Route::post('login', [AuthController::class, 'login']);
 Route::post('refresh', [AuthController::class, 'refresh']);
+Route::get('/bus-stops', [BusController::class, 'getNearByBusStop']);
 Route::group([
- 
     'middleware' => ['api','jwt.verify']
-  
  ], function ($router) {
-    Route::get('/bus-stops', [BusController::class, 'bus_stops']);
-    Route::get('/bus-stops/{bus_stop_id}', [BusController::class, 'bus_list']);
+    Route::get('/bus-stops', [BusController::class, 'getNearByBusStop']);
+    Route::get('/bus-stops/{bus_stop_id}', [BusController::class, 'getBusByBusStopId']);
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::post('me', [AuthController::class, 'me']);
@@ -37,5 +36,3 @@ Route::group([
     Route::resource('users', UserController::class);
     Route::resource('bus', BusController::class);
  });
-
-// Route::apiResource('buses', BusController::class);

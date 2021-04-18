@@ -72,9 +72,9 @@ class BusController extends Controller
     {
         return $this->busInterface->deleteBus($id);
     }
-    public function bus_stops(BusRequest $request)
+    public function bus_stops(Request $request)
     {
-        return $this->busInterface->bus_stops($request);
+        return $this->busInterface->getNearByBusStop($request);
     //     // $lat = 1.3264635;
     //     // //1.3272247,103.884878
     //     // //1.3518888,103.8341397,
@@ -96,6 +96,6 @@ class BusController extends Controller
     }
     public function bus_list($bus_stop_id)
     {
-        return $this->busInterface->bus_list($bus_stop_id);
+        return $this->busInterface->getBusByBusStopId($bus_stop_id);
     }
 }
