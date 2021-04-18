@@ -45,6 +45,4 @@ interface BusInterface
      * @access  public
      */
     public function deleteBus($id);
-    public function getNearByBusStop(Request $request);
-    public function getBusByBusStopId($bus_stop_id);
 }

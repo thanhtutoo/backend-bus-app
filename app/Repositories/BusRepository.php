@@ -87,35 +87,4 @@ class BusRepository implements BusInterface
             return $this->error($e->getMessage(), $e->getCode());
         }
     }
-
-    public function getNearByBusStop(Request $request)
-    {
-        try {
-            $lat = 1.3264635;
-            $lng = 103.8865065;
- 
-            $bus_stops = DB::table('bus_stops')->select("bus_stop_id", "bus_stop_name"
-            ,DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
-            * cos(radians(bus_stops.lat)) 
-            * cos(radians(bus_stops.lng) - radians(" . $lng . ")) 
-            + sin(radians(" .$lat. ")) 
-            * sin(radians(bus_stops.lat))) AS distance"))
-            ->orderBy('distance', 'asc')
-            ->having('distance', '<', 1)
-            ->get();
-            return $this->success("Bus Stops", $bus_stops);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage(), $e->getCode());
-        }
-    }
-    public function getBusByBusStopId($bus_stop_id)
-    {
-        try {
-            $current_time = time();
-            $bus_list = BusTiming::where("bus_stop_id", $bus_stop_id)->where("arrival_timing",">",$current_time)->get();
-            return $this->success("Bus lists", $bus_list);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage(), $e->getCode());
-        }
-    }
 }

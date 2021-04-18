@@ -21,7 +21,25 @@ class BusStopController extends Controller
     {
         $this->busStopInterface = $busStopInterface;
     }
-     /**
+    /**
+    * Display a listing of the busstop nearby.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function bus_stops(Request $request)
+    {
+        return $this->busStopInterface->getNearByBusStop($request);
+    }
+    /**
+    * Display the specified resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function bus_list($bus_stop_id)
+    {
+        return $this->busStopInterface->getBusByBusStopId($bus_stop_id);
+    }
+    /**
     * Display a listing of the resource.
     *
     * @return \Illuminate\Http\Response

@@ -12,7 +12,15 @@ interface BusStopInterface
      * @method  GET api/busstop
      * @access  public
      */
-    public function getAllBusStop();
+    public function getAllBusStop();    
+    
+    /**
+     * Get all busstops near by
+     * 
+     * @method  GET api/bus-stops
+     * @access  public
+     */
+    public function getNearByBusStop(Request $request);
 
     /**
      * Get Bus By ID
@@ -22,7 +30,16 @@ interface BusStopInterface
      * @method  GET api/busstop/{id}
      * @access  public
      */
-    public function getBusStopById($id);
+    public function getBusStopById($id); 
+    /**
+     * Get Bus By ID
+     * 
+     * @param   integer     $id
+     * 
+     * @method  GET api/bus-stops/{id}
+     * @access  public
+     */
+    public function getBusByBusStopId($bus_stop_id);
 
     /**
      * Create | Update Bus

@@ -29,7 +29,7 @@ class BusTiming extends Authenticatable
     
     public function bus_stop()
     {
-        return $this->belongsTo(BusStop::class, 'bus_id', 'bus_id');
+        return $this->belongsTo(BusStop::class, 'bus_stop_id', 'bus_stop_id');
     }
 
 }
