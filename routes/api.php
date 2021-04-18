@@ -7,6 +7,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\BusStopController;
 use App\Http\Controllers\API\BusRouteController;
+use App\Http\Controllers\API\BusTimingController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,4 +40,5 @@ Route::group([
     Route::resource('bus', BusController::class);
     Route::resource('busstop', BusStopController::class);
     Route::resource('busroute', BusRouteController::class);
+    Route::resource('bustiming', BusTimingController::class);
  });

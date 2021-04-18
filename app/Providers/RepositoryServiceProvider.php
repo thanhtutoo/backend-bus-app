@@ -26,6 +26,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Interfaces\BusRouteInterface',
             'App\Repositories\BusRouteRepository'
+        );   
+        $this->app->bind(
+            'App\Interfaces\BusTimingInterface',
+            'App\Repositories\BusTimingRepository'
         );
     }
 }
