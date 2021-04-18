@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 interface BusInterface
 {
     /**
-     * Get all buse
+     * Get all bus
      * 
-     * @method  GET api/buse
+     * @method  GET api/bus
      * @access  public
      */
     public function getAllBus();
@@ -19,7 +19,7 @@ interface BusInterface
      * 
      * @param   integer     $id
      * 
-     * @method  GET api/buse/{id}
+     * @method  GET api/bus/{id}
      * @access  public
      */
     public function getBusById($id);
@@ -30,8 +30,8 @@ interface BusInterface
      * @param   \App\Http\Requests\Request    $request
      * @param   integer                           $id
      * 
-     * @method  POST    api/buse       For Create
-     * @method  PUT     api/buse/{id}  For Update     
+     * @method  POST    api/bus       For Create
+     * @method  PUT     api/bus/{id}  For Update     
      * @access  public
      */
     public function requestBus(BusRequest $request, $id = null);
@@ -41,7 +41,7 @@ interface BusInterface
      * 
      * @param   integer     $id
      * 
-     * @method  DELETE  api/buse/{id}
+     * @method  DELETE  api/bus/{id}
      * @access  public
      */
     public function deleteBus($id);

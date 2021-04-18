@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\BusController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\BusStopController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,8 +27,8 @@ Route::get('/bus-stops', [BusController::class, 'getNearByBusStop']);
 Route::group([
     'middleware' => ['api','jwt.verify']
  ], function ($router) {
-    Route::get('/bus-stops', [BusController::class, 'getNearByBusStop']);
-    Route::get('/bus-stops/{bus_stop_id}', [BusController::class, 'getBusByBusStopId']);
+    Route::get('/bus-stops', [BusController::class, 'bus_stops']);
+    Route::get('/bus-stops/{bus_stop_id}', [BusController::class, 'bus_list']);
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::post('me', [AuthController::class, 'me']);
@@ -35,4 +36,5 @@ Route::group([
     Route::get('users', [UserController::class, 'index']);
     Route::resource('users', UserController::class);
     Route::resource('bus', BusController::class);
+    Route::resource('busstop', BusStopController::class);
  });
