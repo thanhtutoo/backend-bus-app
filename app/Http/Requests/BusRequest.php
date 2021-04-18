@@ -27,7 +27,8 @@ class BusRequest extends FormRequest
             // I want to check the user if exists first
             // If exists, will pass the email for unique validation
             // This is efficient, rather than we creating another validation for create or update
-            'bus_number' => 'required|max:50',
+            'bus_number' => 'numeric|required|max:50',
+            'bus_name' => 'string|required|max:50',
            
         ];
     }

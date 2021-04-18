@@ -24,10 +24,10 @@ class BusStopRequest extends FormRequest
     public function rules()
     {
         return [
-            'bus_stop_name' => 'required|max:50',
+            'bus_stop_name' => 'string|required|max:50',
             'lat' => 'required|max:50',
             'lng' => 'required|max:50',
-            'postal_code' => 'required|max:50',
+            'postal_code' => 'numeric|required|max:50',
         ];
     }
 }

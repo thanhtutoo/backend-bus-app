@@ -25,9 +25,6 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|max:50',
-            // I want to check the user if exists first
-            // If exists, will pass the email for unique validation
-            // This is efficient, rather than we creating another validation for create or update
             'email' => request()->route('user') 
                 ? 'required|email|max:255|unique:users,email,' . request()->route('user')
                 : 'required|email|max:255|unique:users,email',

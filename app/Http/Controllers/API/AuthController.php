@@ -4,9 +4,10 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
- 
+use App\Traits\ResponseAPI;
 class AuthController extends Controller
 {
+    use ResponseAPI;
    /**
     * Get a JWT via given credentials.
     *
@@ -64,10 +65,10 @@ class AuthController extends Controller
     */
    protected function respondWithToken($token)
    {
-       return response()->json([
-           'access_token' => $token,
-           'token_type' => 'bearer',
-           'expires_in' => auth('api')->factory()->getTTL() * 24
-       ]);
+        return $this->success("Login Success", [
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 3600
+        ]);
    }
 }

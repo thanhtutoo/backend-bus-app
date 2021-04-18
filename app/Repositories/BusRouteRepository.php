@@ -6,6 +6,7 @@ use App\Http\Requests\BusRouteRequest;
 use App\Interfaces\BusRouteInterface;
 use App\Traits\ResponseAPI;
 use App\Models\BusRoute;
+use App\Models\BusStop;
 use App\Models\BusTiming;
 use DB;
 use Illuminate\Http\Request;
@@ -50,17 +51,24 @@ class BusRouteRepository implements BusRouteInterface
 
             // Check the busroute
             if($id && !$bus_route) return $this->error("No busRoute with ID $id", 404);
-
-            $bus_route->bus_stop_id = $request->bus_stop_id;
-            $bus_route->bus_id = $request->bus_id;
-            // Save the busroute
-            $bus_route->save();
-
-            DB::commit();
-            return $this->success(
-                $id ? "Busroute updated"
-                    : "Busroute created",
-                $bus_route, $id ? 200 : 201);
+            $bus_stop_id = $request->bus_stop_id;
+            $bus_id =  $request->bus_id;
+            $is_existing_route = BusRoute::where("bus_stop_id", $bus_stop_id)->where("bus_id", $bus_id)->get();
+            if(count($is_existing_route) === 0){
+                $bus_route->bus_stop_id = $request->bus_stop_id;
+                $bus_route->bus_id = $request->bus_id;
+                // Save the busroute
+                $bus_route->save();
+    
+                DB::commit();
+                return $this->success(
+                    $id ? "Busroute updated"
+                        : "Busroute created",
+                    $bus_route, $id ? 200 : 201);
+            } else {
+                return $this->error("Route alrdy existed!", 422);
+            }
+            
         } catch(\Exception $e) {
             DB::rollBack();
             return $this->error($e->getMessage(), 422);

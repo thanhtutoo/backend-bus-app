@@ -24,9 +24,9 @@ class BusTimingRequest extends FormRequest
     public function rules()
     {
         return [
-            'arrival_timing' => 'required|max:50',
-            'bus_stop_id' => 'required|max:50',
-            'bus_id' => 'required|max:50',
+            'arrival_timing' => 'numeric|required|max:50',
+            'bus_stop_id' => 'numeric|required|max:50',
+            'bus_id' => 'numeric|required|max:50',
         ];
     }
 }
