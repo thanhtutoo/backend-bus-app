@@ -22,6 +22,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Interfaces\BusStopInterface',
             'App\Repositories\BusStopRepository'
+        );   
+        $this->app->bind(
+            'App\Interfaces\BusRouteInterface',
+            'App\Repositories\BusRouteRepository'
         );
     }
 }
