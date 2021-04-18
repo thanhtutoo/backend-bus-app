@@ -14,12 +14,11 @@ class CreateBusStopsTable extends Migration
     public function up()
     {
         Schema::create('bus_stops', function (Blueprint $table) {
-            $table->id();
-            $table->integer('bus_stop_id');
-            $table->string('bus_stop_name');
+            $table->increments('bus_stop_id');
+            $table->string('bus_stop_name')->unique();
             $table->string('lat');
             $table->string('lng');
-            $table->string('postal_code');
+            $table->integer('postal_code');
             $table->timestamps();
         });
     }

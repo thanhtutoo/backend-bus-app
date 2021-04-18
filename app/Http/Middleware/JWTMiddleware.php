@@ -5,10 +5,11 @@ use Closure;
 use JWTAuth;
 use Exception;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
+use App\Traits\ResponseAPI;
 
 class JWTMiddleware extends BaseMiddleware
 {
-
+    use ResponseAPI;
     /**
      * Handle an incoming request.
      *
@@ -22,11 +23,11 @@ class JWTMiddleware extends BaseMiddleware
             $user = JWTAuth::parseToken()->authenticate();
         } catch (Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
-                return response()->json(['status' => 'Token is Invalid']);
+                return $this->error("Token is Invalid", 401);
             }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
-                return response()->json(['status' => 'Token has Expired']);
+                return $this->error("Token has Expired", 401);
             }else{
-                return response()->json(['status' => 'Authorization Token not found']);
+                return $this->error("Authorization Token not found", 401);
             }
         }
         return $next($request);

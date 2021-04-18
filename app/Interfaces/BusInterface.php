@@ -7,19 +7,19 @@ use App\Http\Requests\BusRequest;
 interface BusInterface
 {
     /**
-     * Get all buses
+     * Get all buse
      * 
-     * @method  GET api/buses
+     * @method  GET api/buse
      * @access  public
      */
-    public function getAllBuss();
+    public function getAllBus();
 
     /**
      * Get Bus By ID
      * 
      * @param   integer     $id
      * 
-     * @method  GET api/buses/{id}
+     * @method  GET api/buse/{id}
      * @access  public
      */
     public function getBusById($id);
@@ -27,11 +27,11 @@ interface BusInterface
     /**
      * Create | Update Bus
      * 
-     * @param   \App\Http\Requests\BusRequest    $request
+     * @param   \App\Http\Requests\Request    $request
      * @param   integer                           $id
      * 
-     * @method  POST    api/buses       For Create
-     * @method  PUT     api/buses/{id}  For Update     
+     * @method  POST    api/buse       For Create
+     * @method  PUT     api/buse/{id}  For Update     
      * @access  public
      */
     public function requestBus(BusRequest $request, $id = null);
@@ -41,8 +41,10 @@ interface BusInterface
      * 
      * @param   integer     $id
      * 
-     * @method  DELETE  api/buses/{id}
+     * @method  DELETE  api/buse/{id}
      * @access  public
      */
     public function deleteBus($id);
+    public function bus_stops(BusRequest $request);
+    public function bus_list($bus_stop_id);
 }

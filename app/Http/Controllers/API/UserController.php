@@ -9,7 +9,7 @@ use App\Http\Requests\UserRequest;
 use App\Interfaces\UserInterface;
 class UserController extends Controller
 {
-    protected $userInteface;
+    protected $userInterface;
     /**
      * Create a new constructor for this controller
      */

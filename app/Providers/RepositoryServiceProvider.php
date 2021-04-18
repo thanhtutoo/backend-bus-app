@@ -14,6 +14,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Interfaces\UserInterface',
             'App\Repositories\UserRepository'
+        );       
+        $this->app->bind(
+            'App\Interfaces\BusInterface',
+            'App\Repositories\BusRepository'
         );
     }
 }

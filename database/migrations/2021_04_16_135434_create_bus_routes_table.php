@@ -18,6 +18,7 @@ class CreateBusRoutesTable extends Migration
             $table->integer('bus_id');
             $table->integer('bus_stop_id');
             $table->timestamps();
+            $table->unique(['bus_id', 'bus_stop_id']);
         });
     }
 
