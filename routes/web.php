@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\BusController;
-
+use App\Http\Controllers\API\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,3 +17,5 @@ use App\Http\Controllers\API\BusController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('users', [UserController::class, 'index']);
