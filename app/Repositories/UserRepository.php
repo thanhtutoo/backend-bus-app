@@ -19,6 +19,41 @@ class UserRepository implements UserInterface
             $users = DB::table('tbl_relocate_channel_messages')
             ->select("BusinessLeadId")
             ->leftJoin('tbl_relocate_channels', 'tbl_relocate_channels.id', '=', 'tbl_relocate_channel_messages.RelocateChannelId')
+            ->leftJoin('invoices', 'invoices.invoice_link', '=', 'tbl_relocate_channel_messages.AdditionalData')
+            ->where('tbl_relocate_channel_messages.IsMigrated', 1)
+            ->where('tbl_relocate_channel_messages.content', 'invoice')
+            ->where('invoices.invoice_status', '1')
+            ->get();
+            // dd($users);
+            foreach ($users as $key => $relo) {
+                $busnessLead = DB::table('tbl_businesslead')->where('id', $relo->BusinessLeadId)->first();
+
+                $otherBusinessLeads = DB::table('tbl_businesslead')
+                ->where('RelocateId', $busnessLead->RelocateId)
+                ->whereNotIn('Id', [$busnessLead->Id])
+                ->where('ServiceID', $busnessLead->ServiceID)->get();
+                // dd($busnessLead);
+                //   dd($otherBusinessLeads);
+                foreach ($otherBusinessLeads as $key => $otherBusinessLead) {
+                    DB::table('tbl_businesslead')->where('Id', $otherBusinessLead->Id)
+                    ->where('ServiceID', $busnessLead->ServiceID)->update(['Status' => -1]);
+                    DB::table('tbl_businesslead')->where('Id', $busnessLead->Id)
+                    ->where('ServiceID', $busnessLead->ServiceID)->update(['Status' => 7]); //7 is invoice paid
+
+                }
+                // dd($otherBusinessLead);
+            }
+            return $this->success("All Users", $users);
+        } catch(\Exception $e) {
+            return $e;
+        }
+    }
+    public function forQUOTE()
+    {
+        try {
+            $users = DB::table('tbl_relocate_channel_messages')
+            ->select("BusinessLeadId")
+            ->leftJoin('tbl_relocate_channels', 'tbl_relocate_channels.id', '=', 'tbl_relocate_channel_messages.RelocateChannelId')
             ->where('tbl_relocate_channel_messages.IsMigrated', 1)
             ->where('tbl_relocate_channel_messages.content', 'quotation')
             ->where('tbl_relocate_channel_messages.AccountType', 'customer')
